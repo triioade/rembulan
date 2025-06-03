@@ -1,0 +1,357 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f6faff;
+  overflow-x: hidden;
+}
+
+/* Container Utama */
+.container {
+  min-height: 100vh;
+  background-color: #fafdff;
+  /* biru sangat muda */
+  padding: 1.5rem;
+  width: 100vw;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Pada layar kecil, kurangi padding dan lebar */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+/* Judul Utama */
+.main-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Notifikasi */
+.notification {
+  background-color: #10b981;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Jumbotron global style */
+.jumbotron {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  background-image: url("/images/klh.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 0; /* pastikan bukan -1 agar tetap terlihat */
+}
+.jumbotron-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.jumbotron-icon {
+  padding-bottom: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  z-index: 2;
+}
+.jumbotron-content {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+.jumbotron-title {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Layout dua kolom */
+.two-column {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Kolom kiri untuk overview */
+.left-overview {
+  flex: 0 0 360px;
+  min-width: 320px;
+  max-width: 320px;
+}
+
+/* Kolom kanan untuk input & daftar tugas */
+.right-main {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Responsive: tumpuk ke bawah di layar kecil */
+@media (max-width: 900px) {
+  .two-column {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .left-overview,
+  .right-main {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* === Komponen yang dipakai di banyak tempat, tetap di global === */
+
+/* Assignment Card */
+.assignment-card {
+  background-color: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 1.3rem;
+  box-shadow: 0 8px 32px rgba(80, 112, 255, 0.10), 0 1.5px 4px rgba(80, 112, 255, 0.07);
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.35s;
+  width: 100%;
+  flex: 1 1 340px;
+  max-width: 400px;
+  font-size: 1.13rem;
+  margin: 0 auto;
+  border: 1.5px solid #e3eafe;
+}
+.assignment-card.completed {
+  opacity: 0.75;
+  background: #eaf4ff;
+  text-decoration: line-through;
+  border: 1.5px solid #b6c2fa;
+}
+.assignment-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 40px rgba(80, 112, 255, 0.13), 0 2px 8px rgba(80, 112, 255, 0.10);
+}
+.card-title {
+  color: #2563eb;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.5px;
+}
+.card-desc {
+  margin-bottom: 0.75rem;
+  color: #334155;
+  font-size: 1.08rem;
+}
+.card-deadline {
+  color: #64748b;
+  margin-bottom: 0.75rem;
+  font-size: 1.01rem;
+}
+.countdown {
+  color: #22c55e;
+  font-weight: 500;
+  font-size: 1.01rem;
+  letter-spacing: 0.2px;
+}
+.deadline-passed {
+  color: #ef4444;
+  font-weight: 700;
+}
+.btn-complete {
+  margin-top: 1rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(80, 112, 255, 0.10);
+}
+.btn-complete:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 16px rgba(80, 112, 255, 0.18);
+}
+.btn-complete.done {
+  background: #e3eafe;
+  color: #64748b;
+}
+.btn-complete.done:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* Overview Card */
+.overview-card {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 6px 24px rgba(80, 112, 255, 0.08), 0 1.5px 4px rgba(80, 112, 255, 0.05);
+  padding: 2.2rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1.5px solid #e3eafe;
+}
+.overview-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 1.1rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.overview-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.08rem;
+  margin-bottom: 0.75rem;
+  color: #334155;
+  font-weight: 500;
+}
+.overview-progress {
+  margin-top: 1.5rem;
+  font-size: 1.01rem;
+  color: #64748b;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 14px;
+  background: #e3eafe;
+  border-radius: 7px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb 60%, #38bdf8 100%);
+  border-radius: 7px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+/* Upcoming Card Styles */
+.upcoming-card {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 16px rgba(80, 112, 255, 0.07);
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 2rem;
+  border: 1.5px solid #e3eafe;
+}
+.upcoming-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3px;
+}
+.upcoming-list {
+  color: #64748b;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.upcoming-item {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1.04rem;
+}
+.upcoming-item:last-child {
+  border-bottom: none;
+}
+.upcoming-empty {
+  color: #b6c2fa;
+  font-style: italic;
+}
+.btn-delete-upcoming {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.btn-delete-upcoming:hover {
+  background: #b91c1c;
+}
+
+/* Area Input Assignment */
+.assignment-input {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 4px 12px rgba(80, 112, 255, 0.07);
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  border: 1.5px solid #e3eafe;
+}
+.input-title {
+  color: #2563eb;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.input-text,
+.input-textarea {
+  width: 100%;
+  border: 1px solid #b1b4b8;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  outline: none;
+  background-color: #eaf4ff;
+}
+.input-text:focus,
+.input-textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18);
+}
+.btn-add-assignment {
+  margin-top: 1rem;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-add-assignment:hover {
+  background-color: #1d4ed8;
+}
+
+/* Grid untuk Assignment */
+.assignments-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  margin-top: 50px;
+}
+
+

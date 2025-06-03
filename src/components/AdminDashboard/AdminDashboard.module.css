@@ -1,0 +1,13 @@
+.app {
+  width: 100vw;
+  min-height: 100vh;
+}
+.leftOverview {
+  flex: 0 0 360px;
+  min-width: 320px;
+  max-width: 360px;
+}
+.rightMain {
+  flex: 1 1 0;
+  min-width: 0;
+}

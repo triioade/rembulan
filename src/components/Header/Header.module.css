@@ -1,0 +1,290 @@
+.navbar {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  top: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Logo dan teks */
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.logoImage {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+.logoImage:hover {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: black;
+  white-space: nowrap;
+}
+
+/* Action Area */
+.actionArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Tombol Login Desktop */
+.loginButtonDesktop {
+  color: white;
+  background-color: #2563eb;
+   padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+}
+.loginButtonDesktop:hover {
+  background-color: #1d4ed8;
+}
+
+/* Tombol Login Mobile */
+.loginButtonMobile {
+  color: white;
+  background-color: #2563eb;
+    padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 1rem auto;
+  margin-top: 15px;
+  display: none;
+  text-align: center;
+}
+.loginButtonMobile:hover {
+  background-color: #1d4ed8;
+}
+
+/* Toggle Button */
+.toggleButton {
+  display: none;               /* default sembunyi di desktop */
+  padding: 0.3rem;             /* ruang dalam tombol */
+  border: 1px solid #d1d5db;  /* garis pinggir */
+  background: white;
+  border-radius: 0.375rem;     /* sudut agak membulat */
+  cursor: pointer;
+
+  display: flex;               /* flexbox untuk centering */
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  min-width: 36px;             /* minimal lebar */
+  min-height: 36px;            /* minimal tinggi */
+}
+
+.menuIcon {
+  width: 20px;
+  height: 20px;
+  color: #111827;
+  display: block;
+}
+
+/* Tampilkan toggleButton saat mobile */
+@media (max-width: 768px) {
+  .toggleButton {
+    display: flex;
+  }
+}
+
+
+
+/* Nav Menu (ul wrapper) */
+.navMenu {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #111827;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background 0.2s ease;
+}
+.navLink:hover {
+  background-color: #e5e7eb;
+  color: #2563eb;
+}
+
+.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+/* Responsive Mobile Styles */
+@media (max-width: 768px) {
+  .toggleButton {
+    display: block;
+    
+  }
+
+  /* Tampilkan tombol login mobile dan sembunyikan desktop */
+  .loginButtonMobile {
+    display: block;
+  }
+  .loginButtonDesktop {
+    display: none;
+  }
+
+  .navMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    padding: 0 1rem 1rem 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 40;
+  }
+
+  .showMenu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .navList {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    /* Ubah jadi grid 2 kolom agar 2 baris 2 kolom */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
+  }
+
+  .navLink {
+    text-decoration: none;
+    color: #111827;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .navLink:hover {
+    background-color: #f3f4f6;
+    color: #2563eb;
+  }
+
+  .actionArea {
+    gap: 0.5rem;
+  }
+}
+
+/* Desktop overrides */
+@media (min-width: 769px) {
+  .toggleButton {
+    display: none;
+  }
+
+  /* Tampilkan tombol login desktop dan sembunyikan mobile */
+  .loginButtonDesktop {
+    display: inline-block;
+  }
+  .loginButtonMobile {
+    display: none;
+  }
+
+  .navMenu {
+    display: flex !important;
+    justify-content: flex-end;
+    position: static;
+    width: auto;
+    box-shadow: none;
+  }
+
+  .navList {
+    flex-direction: row;
+  }
+
+  .navLink {
+    background: none;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem 1rem; /* Kurangi padding atas bawah */
+  }
+
+  .logoImage {
+    height: 60px;
+    width: 60px; /* Logo lebih kecil */
+  }
+
+  .logoText {
+    font-size: 1.5rem; /* Teks lebih kecil */
+  }
+
+  .loginButtonMobile {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.95rem;
+    max-width: 160px;
+  }
+
+  .toggleButton {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0.25rem;
+  }
+
+  .menuIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+.navbarHidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar {
+  transition: transform 0.3s ease-in-out; /* tambahkan jika belum ada */
+}

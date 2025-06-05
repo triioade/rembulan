@@ -3,6 +3,8 @@ import AssignmentCard from "../Assignment/AssignmentCard";
 import styles from "./StudentDashboard.module.css";
 import "../../App.css";
 import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function StudentDashboard({
   assignments: initialAssignments,
@@ -67,6 +69,30 @@ function StudentDashboard({
   const progress =
     totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    // Pastikan selector .assignment-card sudah ada di DOM
+    const cards = document.querySelectorAll(".assignment-card");
+    if (cards.length > 0) {
+      gsap.from(cards, {
+        scrollTrigger: {
+          trigger: ".assignments-grid",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+        clearProps: "opacity,transform"
+      });
+    }
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [assignmentsWithStatus.length]);
+
   return (
     <div className={styles.app}>
       <Header />
@@ -128,6 +154,7 @@ function StudentDashboard({
                 key={index}
                 assignment={assignment}
                 onToggleComplete={() => handleToggleComplete(assignment)}
+     
               />
             ))}
           </div>

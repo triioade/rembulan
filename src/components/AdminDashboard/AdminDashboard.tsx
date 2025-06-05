@@ -3,9 +3,13 @@ import AssignmentCard from "../Assignment/AssignmentCard";
 import UpcomingAssignmentsCard from "../UpcomingAssignmentsCard/UpcomingAssignmentsCard";
 import styles from "./AdminDashboard.module.css";
 import "../../App.css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
 function AdminDashboard({
   assignments,
+  setAssignments,
   newTitle,
   setNewTitle,
   newDescription,
@@ -20,6 +24,36 @@ function AdminDashboard({
   pendingCount,
   progress,
 }: any) {
+
+  const handleDeleteAssignment = (index: number) => {
+    setAssignments((prevAssignments: any[]) =>
+      prevAssignments.filter((_: any, i: number) => i !== index)
+    );
+  };
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const cards = document.querySelectorAll(".assignment-card");
+    if (cards.length > 0) {
+      gsap.from(cards, {
+        scrollTrigger: {
+          trigger: ".assignments-grid",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+        clearProps: "opacity,transform",
+      });
+    }
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, [assignments?.length]);
+
   return (
     <div className={styles.app}>
       <Header />
@@ -44,7 +78,8 @@ function AdminDashboard({
               Quick Overview
             </h2>
             <div style={{ color: "#6b7280", fontSize: "0.97rem" }}>
-             A Snapshot of your assignments and progress this week
+              {" "}
+              A Snapshot of your assignments and progress this week
             </div>
           </div>
           <UpcomingAssignmentsCard
@@ -79,10 +114,12 @@ function AdminDashboard({
           </div>
         </div>
         <div className={styles.rightMain}>
-          <div style={{ 
-            marginBottom: "1.5rem", 
-            marginTop: "1.5rem" 
-          }}>
+          <div
+            style={{
+              marginBottom: "1.5rem",
+              marginTop: "1.5rem",
+            }}
+          >
             <h2
               style={{
                 fontSize: "1.35rem",
@@ -94,7 +131,8 @@ function AdminDashboard({
               All Asignment
             </h2>
             <div style={{ color: "#6b7280", fontSize: "0.97rem" }}>
-              A Compeherensive list of all assignments this week including their status
+              A Compeherensive list of all assignments this week including their
+              status
             </div>
           </div>
           <div className="assignment-input">
@@ -123,11 +161,14 @@ function AdminDashboard({
             </button>
           </div>
           <div className="assignments-grid">
+            
             {assignments.map((assignment: any, index: number) => (
               <AssignmentCard
                 key={index}
                 assignment={assignment}
                 onToggleComplete={() => handleToggleComplete(index)}
+                onDeleteAssignment={() => handleDeleteAssignment(index)}
+                isAdmin={true}
               />
             ))}
           </div>

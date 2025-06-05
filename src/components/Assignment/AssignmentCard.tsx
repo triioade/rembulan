@@ -8,9 +8,14 @@ import styles from "./AssignmentCard.module.css"; // pastikan file ini ada
 function AssignmentCard({
   assignment,
   onToggleComplete,
+  onDeleteAssignment,
+    isAdmin, // Tambahkan isAdmin
+
 }: {
   assignment: Assignment;
   onToggleComplete: () => void;
+  onDeleteAssignment: () => void;
+    isAdmin?: boolean;
 }) {
   // Countdown logic
   const [timeLeft, setTimeLeft] = useState<number>(
@@ -51,6 +56,13 @@ function AssignmentCard({
           {Math.floor((timeLeft % (1000 * 60)) / 1000)} seconds left
         </span>
       )}
+ {isAdmin && onDeleteAssignment && (
+  <button className={styles.btnDelete} onClick={onDeleteAssignment}>
+    Hapus
+  </button>
+)}
+
+
       <button
         className={`${styles.btnComplete}${
           assignment.completed ? " " + styles.done : ""

@@ -41,6 +41,19 @@
   margin-bottom: 0.75rem;
   font-size: 1.01rem;
 }
+.btnDelete {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnDelete:hover {
+  background-color: #dc2626;
+}
 .countdown {
   color: #eb5353;
   font-weight: 500;
